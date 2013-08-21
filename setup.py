@@ -11,7 +11,7 @@ setup(
     name='django-ckeditor',
     version='4.0.2',
     description='Django admin CKEditor integration.',
-    long_description=open('README.rst', 'r').read() + open('AUTHORS.rst', 'r').read() + open('CHANGELOG.rst', 'r').read(),
+    long_description=open('README.rst', 'r').read(),
     author='Shaun Sephton',
     author_email='connect@shaunsephton.com',
     url='http://github.com/shaunsephton/django-ckeditor',
