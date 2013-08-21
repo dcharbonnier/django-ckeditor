@@ -1,12 +1,26 @@
 import os.path
 from setuptools import setup, find_packages
+from subprocess import check_call
+from setuptools.command.install import install as _install
 
+def init_submodules():
+    check_call(['git', 'submodule', 'init'])
+    check_call(['git', 'submodule', 'update'])
+
+def build_ckeditor():
+    check_call(['src/ckeditor/static/ckeditor/ckeditor/dev/builder/build.sh'])
 
 def get_source_files():
     for dirname, _, files in os.walk('src/ckeditor/static/ckeditor/ckeditor/_source'):
         for filename in files:
             yield os.path.join('/'.join(dirname.split('/')[1:]), filename)
 
+class install(_install):
+    def run(self):
+        _install.run(self)
+        init_submodules()
+        build_ckeditor()
+        
 setup(
     name='django-ckeditor',
     version='4.0.2',
@@ -38,4 +52,5 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     ],
     zip_safe=False,
+    cmdclass={"install": install},
 )
