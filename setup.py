@@ -10,16 +10,11 @@ def init_submodules():
 def build_ckeditor():
     check_call(['src/ckeditor/static/ckeditor/ckeditor/dev/builder/build.sh'])
 
-def get_source_files():
-    for dirname, _, files in os.walk('src/ckeditor/static/ckeditor/ckeditor/_source'):
-        for filename in files:
-            yield os.path.join('/'.join(dirname.split('/')[1:]), filename)
-
 class install(_install):
     def run(self):
-        _install.run(self)
         init_submodules()
         build_ckeditor()
+        _install.run(self)
         
 setup(
     name='django-ckeditor',
@@ -35,9 +30,6 @@ setup(
         'Pillow',
     ],
     include_package_data=True,
-    exclude_package_data={
-        'ckeditor': list(get_source_files()),
-    },
     test_suite="setuptest.setuptest.SetupTestSuite",
     tests_require=[
         'django-setuptest>=0.1.1',
