@@ -39,8 +39,8 @@
                 }
                 var elementConfig = $.extend({}, config || {});
                 if (!config) {
-                    var configName = $element.attr('data-config-name');
-                    elementConfig = $element.attr('data-config') && $.parseJSON($element.attr('data-config')) || {};
+                    var configName = $element.data('config-name');
+                    elementConfig = $element.data('config') && $.parseJSON($element.data('config')) || {};
                     var baseConfig = {};
                     if (typeof DJCKEDITOR == 'object' && typeof DJCKEDITOR.configs == 'object') {
                         baseConfig = $.extend({}, baseConfig,
