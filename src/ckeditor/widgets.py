@@ -1,5 +1,5 @@
 from django import forms
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.utils.encoding import force_unicode
 from django.utils.html import conditional_escape
@@ -8,6 +8,8 @@ from django.forms.util import flatatt
 
 from . import settings as ck_settings, utils
 
+
+ckeditor_config_url = reverse_lazy('ckeditor_configs')
 
 class CKEditorWidget(forms.Textarea):
     """
@@ -24,25 +26,9 @@ class CKEditorWidget(forms.Textarea):
         self.config_name = config_name
         self.extra_config = config
         self.config = utils.validate_config(config_name=config_name, config=config)
-
-    @property
-    def media(self):
-        media_prefix = ck_settings.MEDIA_PREFIX
-        if len(media_prefix) and media_prefix[-1] != '/':
-            media_prefix += '/'
-        source_dir = '%sckeditor/ckeditor' % media_prefix
-
-        if ck_settings.CKEDITOR_DEBUG:
-            source_dir = "%s-dev" % source_dir
-
-        media = super(CKEditorWidget, self).media
-        media.add_js([
-            '%s/ckeditor.js' % (source_dir),
-            reverse('ckeditor_configs'),
-            '%s/core/adapters/jquery.js' % (source_dir),
-            '%s/ckeditor_widget.js' % (source_dir),
-        ])
-        return media
+    
+    class Media:
+        js = ('ckeditor/ckeditor/ckeditor.js', ckeditor_config_url, 'ckeditor/ckeditor/core/adapters/jquery.js', 'ckeditor/widget.js')
 
     def render(self, name, value, attrs=None):
         if value is None:
