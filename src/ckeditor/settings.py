@@ -4,12 +4,7 @@ import collections
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.functional import lazy
-
-
-def url_reverse(pattern):
-  return reverse(pattern)
-
-lazy_reverse = lazy(reverse, str)
+from django.core.urlresolvers import reverse_lazy
 
 DEFAULT_CONFIG = {
     'skin': 'moono',
@@ -19,8 +14,8 @@ DEFAULT_CONFIG = {
     'autoUpdateElement': True,
     'filebrowserWindowWidth': 940,
     'filebrowserWindowHeight': 725,
-    'filebrowserUploadUrl': lazy_reverse('ckeditor_upload'),
-    'filebrowserBrowseUrl': lazy_reverse('ckeditor_browse'),
+    'filebrowserUploadUrl': reverse_lazy('ckeditor_upload'),
+    'filebrowserBrowseUrl': reverse_lazy('ckeditor_browse'),
     'disableNativeSpellChecker': False,
     'allowedContent': True,
 }
