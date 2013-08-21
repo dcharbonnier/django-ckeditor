@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 from . import utils
 from . import settings as ck_settings
@@ -50,7 +51,6 @@ def configs(request):
 
     return render_to_response('ckeditor/configs.js', RequestContext(request, {
         'debug': ck_settings.CKEDITOR_DEBUG,
-        'timestamp': ck_settings.TIMESTAMP,
         'merged_configs': utils.pretty_json_encode(merged_configs),
         'jquery_override_val': utils.json_encode(ck_settings.JQUERY_OVERRIDE_VAL),
     }), mimetype="application/x-javascript")
