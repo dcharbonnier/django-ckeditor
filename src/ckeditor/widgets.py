@@ -28,7 +28,7 @@ class CKEditorWidget(forms.Textarea):
         self.config = utils.validate_config(config_name=config_name, config=config)
     
     class Media:
-        js = ('ckeditor/ckeditor/ckeditor.js', ckeditor_config_url, 'ckeditor/ckeditor/core/adapters/jquery.js', 'ckeditor/widget.js')
+        js = ('ckeditor/ckeditor/dev/builder/release/ckeditor/ckeditor.js', ckeditor_config_url, 'ckeditor/ckeditor/dev/builder/release/ckeditor/adapters/jquery.js', 'ckeditor/widget.js')
 
     def render(self, name, value, attrs=None):
         if value is None:
