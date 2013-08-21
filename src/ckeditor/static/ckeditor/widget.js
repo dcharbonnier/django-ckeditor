@@ -40,7 +40,7 @@
                 var elementConfig = $.extend({}, config || {});
                 if (!config) {
                     var configName = $element.attr('data-config-name');
-                    elementConfig = $.parseJSON($element.attr('data-config')) || {};
+                    elementConfig = $element.attr('data-config') && $.parseJSON($element.attr('data-config')) || {};
                     var baseConfig = {};
                     if (typeof DJCKEDITOR == 'object' && typeof DJCKEDITOR.configs == 'object') {
                         baseConfig = $.extend({}, baseConfig,
