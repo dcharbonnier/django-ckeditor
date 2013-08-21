@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 def get_source_files():
-    for dirname, _, files in os.walk('ckeditor/static/ckeditor/ckeditor/_source'):
+    for dirname, _, files in os.walk('src/ckeditor/static/ckeditor/ckeditor/_source'):
         for filename in files:
             yield os.path.join('/'.join(dirname.split('/')[1:]), filename)
 
@@ -15,7 +15,8 @@ setup(
     author='Shaun Sephton',
     author_email='connect@shaunsephton.com',
     url='http://github.com/shaunsephton/django-ckeditor',
-    packages=find_packages(exclude=['project', ]),
+    package_dir={'': 'src'},
+    packages=find_packages('src'),
     install_requires=[
         'Pillow',
     ],
