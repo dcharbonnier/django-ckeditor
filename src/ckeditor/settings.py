@@ -12,7 +12,7 @@ def url_reverse(pattern):
 lazy_reverse = lazy(reverse, str)
 
 DEFAULT_CONFIG = {
-    'skin': 'moonocolor',
+    'skin': 'moono',
     'toolbar': 'Full',
     'height': 291,
     'width': 835,
