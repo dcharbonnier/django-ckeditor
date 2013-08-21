@@ -2,6 +2,7 @@ import os.path
 from setuptools import setup, find_packages
 from subprocess import check_call
 from setuptools.command.install import install as _install
+from setuptools.command.develop import develop as _develop
 
 def init_submodules():
     check_call(['git', 'submodule', 'init'])
@@ -16,6 +17,12 @@ class install(_install):
         build_ckeditor()
         _install.run(self)
         
+class develop(_develop):
+    def run(self):
+        init_submodules()
+        build_ckeditor()
+        _develop.run(self)
+   
 setup(
     name='django-ckeditor',
     version='4.2.0.1',
@@ -44,5 +51,5 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     ],
     zip_safe=False,
-    cmdclass={"install": install},
+    cmdclass={"install": install, "develop": develop},
 )
