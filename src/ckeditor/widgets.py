@@ -32,17 +32,15 @@ class CKEditorWidget(forms.Textarea):
             media_prefix += '/'
         source_dir = '%sckeditor/ckeditor' % media_prefix
 
-        timestamp = ck_settings.TIMESTAMP
-
         if ck_settings.CKEDITOR_DEBUG:
             source_dir = "%s-dev" % source_dir
 
         media = super(CKEditorWidget, self).media
         media.add_js([
-            '%s/ckeditor.js?timestamp=%s' % (source_dir, timestamp),
+            '%s/ckeditor.js' % (source_dir),
             reverse('ckeditor_configs'),
-            '%s/core/adapters/jquery.js?timestamp=%s' % (source_dir, timestamp),
-            '%s/ckeditor_widget.js?timestamp=%s' % (source_dir, timestamp),
+            '%s/core/adapters/jquery.js' % (source_dir),
+            '%s/ckeditor_widget.js' % (source_dir),
         ])
         return media
 

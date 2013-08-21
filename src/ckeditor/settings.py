@@ -9,12 +9,7 @@ from django.utils.functional import lazy
 def url_reverse(pattern):
   return reverse(pattern)
 
-
 lazy_reverse = lazy(reverse, str)
-
-
-TIMESTAMP = 'D72G'
-
 
 DEFAULT_CONFIG = {
     'skin': 'moonocolor',
