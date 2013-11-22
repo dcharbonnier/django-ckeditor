@@ -25,7 +25,7 @@ class develop(_develop):
    
 setup(
     name='django-ckeditor',
-    version='4.2.0.1',
+    version='4.3.0.1',
     description='Django admin CKEditor integration.',
     long_description=open('README.rst', 'r').read(),
     author='Shaun Sephton',
