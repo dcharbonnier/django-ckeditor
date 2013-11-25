@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.utils.encoding import force_unicode
 from django.utils.html import conditional_escape
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 from django.forms.util import flatatt
 
@@ -28,7 +29,7 @@ class CKEditorWidget(forms.Textarea):
         self.config = utils.validate_config(config_name=config_name, config=config)
     
     class Media:
-        js = ('ckeditor/ckeditor/dev/builder/release/ckeditor/ckeditor.js', ckeditor_config_url, 'ckeditor/ckeditor/dev/builder/release/ckeditor/adapters/jquery.js', 'ckeditor/widget.js')
+        js = (staticfiles_storage.url('ckeditor/ckeditor/dev/builder/release/ckeditor/ckeditor.js'), ckeditor_config_url, staticfiles_storage.url('ckeditor/adapter.js'), staticfiles_storage.url('ckeditor/widget.js'))
 
     def render(self, name, value, attrs=None):
         if value is None:
