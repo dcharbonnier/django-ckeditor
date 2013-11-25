@@ -1,4 +1,8 @@
+{% load static %}
 window.DJCKEDITOR = (typeof DJCKEDITOR == 'object') ? DJCKEDITOR : {};
+
+
+
 DJCKEDITOR.configs = {{ merged_configs|safe }};
 
 if (typeof CKEDITOR == 'object' && typeof CKEDITOR.config == 'object') {
@@ -7,7 +11,11 @@ if (typeof CKEDITOR == 'object' && typeof CKEDITOR.config == 'object') {
     {% else %}
         CKEDITOR.timestamp = '{{ timestamp|escapejs }}';
     {% endif %}
+    {% for plugin in plugins %}
+        CKEDITOR.plugins.addExternal("{{plugin.0}}","{% static plugin.1%}/plugin.js");
+    {% endfor %}
     CKEDITOR.config.jqueryOverrideVal = {{ jquery_override_val|safe }};
+
 }
 
 (function($) {

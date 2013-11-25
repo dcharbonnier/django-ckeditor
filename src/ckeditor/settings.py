@@ -20,6 +20,7 @@ DEFAULT_CONFIG = {
     'allowedContent': True,
 }
 
+CKEDITOR_PLUGINS = getattr(settings, 'CKEDITOR_PLUGINS', [])
 
 #: If CKEDITOR_DEBUG=True, uses the unminified version of files
 CKEDITOR_DEBUG = getattr(settings, 'CKEDITOR_DEBUG', False)

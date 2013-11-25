@@ -48,9 +48,9 @@ def configs(request):
     if ck_settings.CONFIGS is not None:
         for config_name, config in ck_settings.CONFIGS.iteritems():
             merged_configs[config_name] = utils.validate_config(config_name)
-
     return render_to_response('ckeditor/configs.js', RequestContext(request, {
         'debug': ck_settings.CKEDITOR_DEBUG,
+        'plugins': ck_settings.CKEDITOR_PLUGINS,
         'merged_configs': utils.pretty_json_encode(merged_configs),
         'jquery_override_val': utils.json_encode(ck_settings.JQUERY_OVERRIDE_VAL),
     }), mimetype="application/x-javascript")
